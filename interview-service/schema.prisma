@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+generator db {
+  provider = "go run github.com/steebchen/prisma-client-go"
+}
+
+model Interview {
+  id          String   @id @default(uuid())
+  time        DateTime
+  vacancyUrl  String?  @map("vacancy_url")
+  meetingUrl  String?  @map("meeting_url")
+  companyName String
+  isCompleted Boolean  @default(false) @map("is_completed")
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
