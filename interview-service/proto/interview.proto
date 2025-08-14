@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package interview;
+
+import "google/protobuf/timestamp.proto";
+
+service InterviewService {
+  rpc GetInterview(GetInterviewRequest) returns (GetInterviewResponse);
+  rpc ListInterviews(ListInterviewsRequest) returns (ListInterviewsResponse);
+  rpc CreateInterview(CreateInterviewRequest) returns (CreateInterviewResponse);
+  rpc UpdateInterview(UpdateInterviewRequest) returns (UpdateInterviewResponse);
+  rpc DeleteInterview(DeleteInterviewRequest) returns (DeleteInterviewResponse);
+}
+
+message GetInterviewRequest {
+  string id = 1;
+}
+
+message GetInterviewResponse {
+  string id = 1;
+  string company_name = 2;
+  string user_id = 3;
+  bool is_completed = 4;
+  google.protobuf.Timestamp time = 5;
+  string notes = 6;
+  string vacancy_url = 7;
+  string meeting_url = 8;
+}
+
+message ListInterviewsRequest {
+  string user_id = 1;
+}
+
+message ListInterviewsResponse {
+  repeated GetInterviewResponse interviews = 1;
+}
+
+message CreateInterviewRequest {
+  string company_name = 1;
+  string user_id = 2;
+  bool is_completed = 3;
+  google.protobuf.Timestamp time = 4;
+  string notes = 5;
+  string vacancy_url = 6;
+  string meeting_url = 7;
+}
+
+message CreateInterviewResponse {
+  string id = 1;
+}
+
+message UpdateInterviewRequest {
+  string id = 1;
+  string company_name = 2;
+  string user_id = 3;
+  bool is_completed = 4;
+  google.protobuf.Timestamp time = 5;
+  string notes = 6;
+  string vacancy_url = 7;
+  string meeting_url = 8;
+}
+
+message UpdateInterviewResponse {
+  string id = 1;
+}
+
+message DeleteInterviewRequest {
+  string id = 1;
+}
+
+message DeleteInterviewResponse {
+  string id = 1;
+}

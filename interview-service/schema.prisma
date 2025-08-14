@@ -9,10 +9,11 @@ generator db {
 
 model Interview {
   id          String   @id @default(uuid())
+  companyName String
   time        DateTime
+  notes       String?
   vacancyUrl  String?  @map("vacancy_url")
   meetingUrl  String?  @map("meeting_url")
-  companyName String
   isCompleted Boolean  @default(false) @map("is_completed")
   userId      String
   createdAt   DateTime @default(now())
