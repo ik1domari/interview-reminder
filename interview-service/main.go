@@ -1,5 +1,3 @@
-//go:generate go run github.com/steebchen/prisma-client-go db push
-
 package main
 
 import (
@@ -8,23 +6,10 @@ import (
 )
 
 func main() {
-	if err := Run(); err != nil {
-		panic(err)
-	}
-}
-
-func Run() error {
-	client, err := database.NewClient()
-
+	db, err := database.New()
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
+	defer db.Close()
 
-	defer func() {
-		if err := client.Prisma.Disconnect(); err != nil {
-			log.Fatal(err)
-		}
-	}()
-
-	return nil
 }
